@@ -20,6 +20,12 @@ public:
     int Xpos() ;                    // Returns x_pos
     int Ypos() ;                    // Returns y_pos
     void SetType(Ship_Type::Enum ship_type);    // Changes Ship_Type::Enum type
+    Ship_Type::Enum Type();         // returns the Ship.type
+    int Value();                    // returns the Ship.value
+    bool operator < (Ship& ship);
+    bool IsAdjacent(int x, int y);  // returns bool: (this adjacent to (x, y))
+    void SetCaptured(bool flag);    // sets the captured flag
+    bool GetCaptured();             // returns Ship.captured
 private:
     int x_pos;
     int y_pos;
@@ -27,6 +33,7 @@ private:
     int d_y;                        // Change of the y-cord per time unit
     Ship_Type::Enum type;           // The ship type {Captured, Cargo, Escort, Pirate}
     int value;                      // Unique value (eg. nth cargoe ship created) used for Ships::Remove(value)
+    bool captured;                  // boolean flag used to signify that a Ship_Type::Pirate ship has                                    // captured a cargo on this time step.
 };
 
 
