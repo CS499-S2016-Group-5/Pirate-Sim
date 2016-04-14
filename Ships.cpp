@@ -18,11 +18,11 @@ int Ships::num_pirates=0;
 int Ships::num_captureds=0;
 
 Ships::Ships(Counts* count, Ship_Type::Enum ship_type, int PIRATE_PROB, int CARGO_PROB, int ESCORT_PROB) :    
+        count_ptr(count),
         type(ship_type),
         pirate_prob(PIRATE_PROB),
         cargo_prob(CARGO_PROB),
-        escort_prob(ESCORT_PROB),
-        count_ptr(count) {}
+        escort_prob(ESCORT_PROB){}
 
 void Ships::Move() {
     Ship* ship_ptr;

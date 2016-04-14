@@ -187,7 +187,7 @@ void Simulation::Rescue()
     }
 }
 
-Counts* Simulation::GetCounters() 
+Counts* Simulation::GetCounters()
 {
     return &counters;
 }

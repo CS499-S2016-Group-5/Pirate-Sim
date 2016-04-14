@@ -1,9 +1,3 @@
-
-
-
-
-
-
 #ifndef SHIP_TYPE
 #define SHIP_TYPE 
 namespace Ship_Type
@@ -14,4 +8,4 @@ namespace Ship_Type
 namespace State{
     enum Enum {SINGLE_STEP, RUNNING, STOP, CLOSE};
 }
-#endif /* ifndef SHIP_TYPE */
+#endif /* ifndef SHIP_TYPE */ 

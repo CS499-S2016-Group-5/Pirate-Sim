@@ -29,6 +29,11 @@ signals:
 
 private:
     Ui::SimWindow *ui;
+    QPixmap display;
+    QPixmap capturedPix;
+    QPixmap cargoPix;
+    QPixmap patrolPix;
+    QPixmap piratePix;
     Simulation *mySim;
     int m_iPirateProb;
     int m_iCargoProb;

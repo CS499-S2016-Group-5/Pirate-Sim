@@ -1,10 +1,8 @@
-
-
-
 #ifndef COUNTS_H
 #define COUNTS_H 
 
 class Counts {
+private:
         unsigned int cargos_exited;
         unsigned int cargos_entered;
         unsigned int escorts_exited;
@@ -18,8 +16,8 @@ class Counts {
     public:
         Counts() : cargos_exited(0),
                     cargos_entered(0),
-                    escorts_entered(0),
                     escorts_exited(0),
+                    escorts_entered(0),
                     pirates_exited(0),
                     pirates_entered(0),
                     pirates_defeated(0),

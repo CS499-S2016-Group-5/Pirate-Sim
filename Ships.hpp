@@ -35,6 +35,7 @@ public:
 
 private:
     Counts* count_ptr;
+    Ship_Type::Enum type;           // holds the type of ship the forward_list contains
     int pirate_prob;
     int cargo_prob;
     int escort_prob;
@@ -44,7 +45,6 @@ private:
     static int num_pirates;     // num of pirates generated for unique ID (Ship::value)
     static int num_escorts;     // num of escorts generated for unique ID
     static int num_captureds;    // num of captureds created for unique ID
-    Ship_Type::Enum type;           // holds the type of ship the forward_list contains
     std::forward_list<Ship> ship_list;  // forward_list instead of vector for the constant time delete
    // the following four methods inc num_{cargos, pirates, escorts, captureds}
     bool IsOutOfBounds(Ship* ship_ptr); // return true if ship is out of the grid bounds

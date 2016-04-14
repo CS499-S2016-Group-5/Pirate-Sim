@@ -40,9 +40,18 @@ void SimSettingsDialog::updateSim()
 {
     Counts cnt;
     cnt = emit update();
-    ui->CapturedRescueLabel->setText(QString::number(cnt.CapturedsRescued()));
-    ui->CargoExitLabel->setText(QString::number(cnt.CargosExited()));
-    ui->CargoEnterLabel->setText(QString::number(cnt.CargosEntered()));
+
+    {
+        ui->CapturedRescueLabel->setText(QString::number(cnt.CapturedsRescued()));
+        ui->CargoExitLabel->setText(QString::number(cnt.CargosExited()));
+        ui->CargoEnterLabel->setText(QString::number(cnt.CargosEntered()));
+        ui->CargosCapturedLabel->setText(QString::number(cnt.CargosCaptured()));
+        ui->PatrolEnterLabel->setText(QString::number(cnt.EscortsEntered()));
+        ui->PatrolExitLabel->setText(QString::number(cnt.EscortsExited()));
+        ui->PirateEnterLabel->setText(QString::number(cnt.PiratesEntered()));
+        ui->PirateExitLabel->setText(QString::number(cnt.PiratesExited()));
+        ui->PiratesDestroyedLabel->setText(QString::number(cnt.PiratesExited()));
+    }
 }
 
 void SimSettingsDialog::closeEvent(QCloseEvent *event)
@@ -58,10 +67,10 @@ void SimSettingsDialog::on_StartButton_clicked()
     ui->doubleSpinBox->setEnabled(false);
     ui->doubleSpinBox_2->setEnabled(false);
     ui->doubleSpinBox_3->setEnabled(false);
-    m_timer.start(10);
     if(running)
     {
         //application is in paused state
+        emit pause();
     }
     else
     {
@@ -69,8 +78,10 @@ void SimSettingsDialog::on_StartButton_clicked()
         int pirateProb = ui->doubleSpinBox->value()*100;
         int cargoProb = ui->doubleSpinBox_2->value()*100;
         int patrolProb = ui->doubleSpinBox_3->value()*100;
-        emit this->start(pirateProb, cargoProb, patrolProb);
+        emit start(pirateProb, cargoProb, patrolProb);
     }
+    running = true;
+    m_timer.start(1000);
 }
 
 void SimSettingsDialog::on_StepButton_clicked()
@@ -95,4 +106,5 @@ void SimSettingsDialog::on_StopButton_clicked()
     ui->doubleSpinBox->setEnabled(true);
     ui->doubleSpinBox_2->setEnabled(true);
     ui->doubleSpinBox_3->setEnabled(true);
+    emit stop();
 }
