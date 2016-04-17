@@ -18,15 +18,15 @@ int Ships::num_pirates=0;
 int Ships::num_captureds=0;
 
 Ships::Ships(Counts* count, Ship_Type::Enum ship_type, int PIRATE_PROB, int CARGO_PROB, int ESCORT_PROB) :    
-        count_ptr(count),
         type(ship_type),
         pirate_prob(PIRATE_PROB),
         cargo_prob(CARGO_PROB),
-        escort_prob(ESCORT_PROB){}
+        escort_prob(ESCORT_PROB),
+        count_ptr(count) {}
 
 void Ships::Move() {
     Ship* ship_ptr;
-    for (auto it = ship_list.begin(); it != ship_list.end(); it++)
+    for (auto it = ship_list.begin(); it != ship_list.end(); ++it)
     {
         it->Move();
         ship_ptr = &(*it);
@@ -45,7 +45,9 @@ void Ships::Move() {
                 case Ship_Type::Captured:
                     break;
             }
+            it->SetRemoveFlag();
            RemoveShip(it->Value()); 
+           break;
         }
     }
 }
@@ -146,7 +148,7 @@ void Ships::AddCapturedShip(int x, int y) {
     
 }
 
-bool remove_val(Ship& ship) {return (ship.Value() == 0);}
+bool remove_flag(Ship& ship) {return (ship.RemoveFlag());}
 
 void Ships::RemoveShip(int val) {
     /*
@@ -160,7 +162,7 @@ void Ships::RemoveShip(int val) {
         prev_it++;
     }
     */
-    ship_list.remove_if(remove_val);
+    ship_list.remove_if(remove_flag);
 }
 
 std::forward_list<Ship>::iterator Ships::Begin() 

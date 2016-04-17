@@ -20,7 +20,7 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox">
+         <widget class="QDoubleSpinBox" name="PirateSpinBox">
           <property name="maximum">
            <double>1.000000000000000</double>
           </property>
@@ -33,7 +33,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_3">
+         <widget class="QDoubleSpinBox" name="CargoSpinBox">
           <property name="maximum">
            <double>1.000000000000000</double>
           </property>
@@ -46,7 +46,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBox_2">
+         <widget class="QDoubleSpinBox" name="PatrolSpinBox">
           <property name="maximum">
            <double>1.000000000000000</double>
           </property>

@@ -47,7 +47,7 @@ Counts SimWindow::updateSim()
         mySim->Update();
         retVal = *(mySim->GetCounters());
         Simulation::gridXxYx4 grid = mySim->Grid();
-
+        //*
         QPixmap foreground = display;
         QPainter p(&foreground);
 
@@ -70,7 +70,7 @@ Counts SimWindow::updateSim()
                     //draw patrol
                     p.drawPixmap(i*35, j*35, patrolPix);
                 }
-                if(grid[i][j][4] != 0)
+                if(grid[i][j][3] != 0)
                 {
                     //draw pirate
                     p.drawPixmap(i*35, j*35, piratePix);
@@ -78,8 +78,8 @@ Counts SimWindow::updateSim()
                 //
             }
         }
-        ui->label->setPixmap(foreground);
-    }//*/
+        ui->label->setPixmap(foreground);//*/
+    }
     return retVal;
 }
 void SimWindow::pauseSim()
