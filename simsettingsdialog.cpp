@@ -52,7 +52,7 @@ void SimSettingsDialog::updateSim()
         ui->PatrolExitLabel->setText(QString::number(cnt.EscortsExited()));
         ui->PirateEnterLabel->setText(QString::number(cnt.PiratesEntered()));
         ui->PirateExitLabel->setText(QString::number(cnt.PiratesExited()));
-        ui->PiratesDestroyedLabel->setText(QString::number(cnt.PiratesExited()));
+        ui->PiratesDestroyedLabel->setText(QString::number(cnt.PiratesDefeated()));
     }
 }
 
