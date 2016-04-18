@@ -9,7 +9,8 @@
 #include"Ships.hpp"
 #include"Ship.hpp"
 #include"RandomEvent.hpp"
-#include<iostream>            
+#include<iostream>
+#include <queue>
 #include"Counts.hpp"
 
 int Ships::num_cargos = 0;
@@ -26,6 +27,7 @@ Ships::Ships(Counts* count, Ship_Type::Enum ship_type, int PIRATE_PROB, int CARG
 
 void Ships::Move() {
     Ship* ship_ptr;
+    std::queue<int> removeList;
     for (auto it = ship_list.begin(); it != ship_list.end(); ++it)
     {
         it->Move();
@@ -46,9 +48,15 @@ void Ships::Move() {
                     break;
             }
             it->SetRemoveFlag();
-           RemoveShip(it->Value()); 
-           break;
+           //RemoveShip(it->Value());
+            removeList.push(it->Value());
         }
+    }
+    while(!removeList.empty())
+    {
+        int removeVal = removeList.front();
+        removeList.pop();
+        RemoveShip(removeVal);
     }
 }
 
