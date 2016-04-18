@@ -9,7 +9,8 @@
 #include"Ships.hpp"
 #include"Ship.hpp"
 #include"RandomEvent.hpp"
-#include<iostream>            
+#include<iostream>
+#include <queue>
 #include"Counts.hpp"
 
 int Ships::num_cargos = 0;
@@ -26,7 +27,8 @@ Ships::Ships(Counts* count, Ship_Type::Enum ship_type, int PIRATE_PROB, int CARG
 
 void Ships::Move() {
     Ship* ship_ptr;
-    for (auto it = ship_list.begin(); it != ship_list.end(); it++)
+    std::queue<int> removeList;
+    for (auto it = ship_list.begin(); it != ship_list.end(); ++it)
     {
         it->Move();
         ship_ptr = &(*it);
@@ -45,8 +47,16 @@ void Ships::Move() {
                 case Ship_Type::Captured:
                     break;
             }
-           RemoveShip(it->Value()); 
+            it->SetRemoveFlag();
+           //RemoveShip(it->Value());
+            removeList.push(it->Value());
         }
+    }
+    while(!removeList.empty())
+    {
+        int removeVal = removeList.front();
+        removeList.pop();
+        RemoveShip(removeVal);
     }
 }
 
@@ -146,7 +156,7 @@ void Ships::AddCapturedShip(int x, int y) {
     
 }
 
-bool remove_val(Ship& ship) {return (ship.Value() == 0);}
+bool remove_flag(Ship& ship) {return (ship.RemoveFlag());}
 
 void Ships::RemoveShip(int val) {
     /*
@@ -160,7 +170,7 @@ void Ships::RemoveShip(int val) {
         prev_it++;
     }
     */
-    ship_list.remove_if(remove_val);
+    ship_list.remove_if(remove_flag);
 }
 
 std::forward_list<Ship>::iterator Ships::Begin() 

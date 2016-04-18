@@ -29,7 +29,11 @@ class Simulation
     // Simulation::Update();
     void Generate();        // Randomly generates ships for Cargos, Pirates, Escorts
     void BuildGrid();      
-    
+    int Cargos();           // Return the number of Cargos
+    int Captureds();        // Return the number of Captureds
+    int Escorts();          // Return the number of Escorts
+    int Pirates();          // Return the number of Pirates
+   
   public:
     typedef int (&gridXxYx4)[X][Y][4];
     Simulation(int PIRATE_PROB, int CARGO_PROB, int ESCORT_PROB);

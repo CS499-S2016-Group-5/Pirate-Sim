@@ -57,6 +57,7 @@ void Simulation::Defeat()
         for ( ; p_begin != p_end; p_begin++){
             if (p_begin->IsAdjacent(e_begin->Xpos(), e_begin->Ypos())){
                 counters.IncPiratesDefeated();
+                p_begin->SetRemoveFlag();
                 pirate_ships.RemoveShip(p_begin->Value());
                 break;
             }
@@ -153,6 +154,7 @@ void Simulation::Capture()
                 // ship
                 captured_ships.AddCapturedShip(car_begin->Xpos(), car_begin->Ypos());
                 // delete the captured cargo ship
+                car_begin->SetRemoveFlag();
                 cargo_ships.RemoveShip(car_begin->Value());
                 break;
             }
@@ -180,6 +182,7 @@ void Simulation::Rescue()
                 // its place.  then remove captured
                 counters.IncCapturedsRescued();
                 cargo_ships.AddCargoShip(cap_begin->Xpos(), cap_begin->Ypos(), false);
+                cap_begin->SetRemoveFlag();
                 captured_ships.RemoveShip(cap_begin->Value());
                 break;
             }
@@ -189,6 +192,10 @@ void Simulation::Rescue()
 
 Counts* Simulation::GetCounters() 
 {
+    counters.SetEscorts(Escorts());
+    counters.SetCargos(Cargos());
+    counters.SetCaptureds(Captureds());
+    counters.SetPirates(Pirates());
     return &counters;
 }
 
@@ -210,4 +217,48 @@ void Simulation::AddPirateShip(int x, int y)
 void Simulation::AddCapturedShip(int x, int y)
 {
     captured_ships.AddCapturedShip(x, y);
+}
+
+int Simulation::Cargos()
+{
+    std::forward_list<Ship>::iterator begin = cargo_ships.Begin();
+    std::forward_list<Ship>::iterator end = cargo_ships.End();
+    int count = 0;
+    for ( ; begin != end; begin++){
+        count++;
+    }
+    return count;
+}
+
+int Simulation::Captureds()
+{
+    std::forward_list<Ship>::iterator begin = captured_ships.Begin();
+    std::forward_list<Ship>::iterator end = captured_ships.End();
+    int count = 0;
+    for ( ; begin != end; begin++){
+        count++;
+    }
+    return count;
+}
+
+int Simulation::Pirates()
+{
+    std::forward_list<Ship>::iterator begin = pirate_ships.Begin();
+    std::forward_list<Ship>::iterator end = pirate_ships.End();
+    int count = 0;
+    for ( ; begin != end; begin++){
+        count++;
+    }
+    return count;
+}
+
+int Simulation::Escorts()
+{
+    std::forward_list<Ship>::iterator begin = escort_ships.Begin();
+    std::forward_list<Ship>::iterator end = escort_ships.End();
+    int count = 0;
+    for ( ; begin != end; begin++){
+        count++;
+    }
+    return count;
 }

@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>grid.png</file>
+        <file>captured_ship_small.png</file>
+        <file>cargo_ship_small.png</file>
+        <file>patrol_ship_small.png</file>
+        <file>pirate_ship_small.png</file>
+    </qresource>
+</RCC>

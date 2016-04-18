@@ -26,6 +26,8 @@ public:
     bool IsAdjacent(int x, int y);  // returns bool: (this adjacent to (x, y))
     void SetCaptured(bool flag);    // sets the captured flag
     bool GetCaptured();             // returns Ship.captured
+    void SetRemoveFlag();           // sets remove_flag to true
+    bool RemoveFlag();              // return remove_flag
 private:
     int x_pos;
     int y_pos;
@@ -34,6 +36,7 @@ private:
     Ship_Type::Enum type;           // The ship type {Captured, Cargo, Escort, Pirate}
     int value;                      // Unique value (eg. nth cargoe ship created) used for Ships::Remove(value)
     bool captured;                  // boolean flag used to signify that a Ship_Type::Pirate ship has                                    // captured a cargo on this time step.
+    bool remove_flag;               // flag that will be used to identify ships that need to be removed
 };
 
 

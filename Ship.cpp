@@ -9,11 +9,11 @@
 #include<iostream>
 
 void Ship::Move() {
-    x_pos += d_x; 
+    x_pos += d_x;
     y_pos += d_y;
 }
 
-Ship::Ship(int x, int y, int val, Ship_Type::Enum ship_type) 
+Ship::Ship(int x, int y, int val, Ship_Type::Enum ship_type)
 {
     x_pos = x;
     captured = false;
@@ -22,11 +22,12 @@ Ship::Ship(int x, int y, int val, Ship_Type::Enum ship_type)
     type = ship_type;
     d_x = 0;
     d_y = 0;
+    remove_flag = false;
 
     if (type == Ship_Type::Pirate)  d_y = -1;
     else if ( type == Ship_Type::Cargo) d_x = 1;
     else if ( type == Ship_Type::Escort) d_x = -2;
-    else 
+    else
         d_y = 1;
        // std::cout << "Error!  Invalid Ship_type::Enum ship_type passed to Ship::Ship()" << std::endl;
 }
@@ -35,18 +36,18 @@ int Ship::Xpos() {
     return x_pos;
 }
 
-int Ship::Ypos() 
+int Ship::Ypos()
 {
     return y_pos;
 }
 
 void Ship::SetType(Ship_Type::Enum ship_type) {
-   type = ship_type; 
+   type = ship_type;
    switch (type)
    {
-       case Ship_Type::Pirate:{ 
+       case Ship_Type::Pirate:{
                         d_x = 0;
-                        d_y = -1; 
+                        d_y = -1;
                         break;
                    }
        case Ship_Type::Cargo:{    d_x = 1;
@@ -59,13 +60,13 @@ void Ship::SetType(Ship_Type::Enum ship_type) {
                       }
        case Ship_Type::Escort:{   d_x = -2;
                         d_y = 0;
-                        break;   
+                        break;
                     }
         default: break;
    }
 }
 
-Ship_Type::Enum Ship::Type() 
+Ship_Type::Enum Ship::Type()
 {
     return type;
 }
@@ -105,5 +106,15 @@ void Ship::SetCaptured(bool flag)
 bool Ship::GetCaptured()
 {
     return captured;
+}
+
+void Ship::SetRemoveFlag()
+{
+    remove_flag = true;
+}
+
+bool Ship::RemoveFlag()
+{
+    return remove_flag;
 }
 
